@@ -1,0 +1,77 @@
+<form #f="ngForm" novalidate>
+
+  <!-- We'll add our form controls here -->
+
+  <button type="submit" (click)="save(f.value, f.valid)">Submit</button>
+</form>
+
+<!-- text input -->
+<div>
+  <label>Name</label>
+  <input type="text" name="name" [(ngModel)]="user.name">
+</div>
+
+<!-- number input -->
+<div>
+  <label>Age</label>
+  <input type="number" name="age" [(ngModel)]="user.age">
+</div>
+
+<!-- radio buttons -->
+<div>
+  <label>Gender</label>
+  <div *ngFor="let gender of genders">
+    <label>
+      <input type="radio" name="gender" [(ngModel)]="user.gender" [value]="gender.value"> {{gender.display}}
+    </label>
+  </div>
+</div>
+
+<!-- select (Primitive type) -->
+  <div>
+    <label>Role</label>
+    <select name="role" [(ngModel)]="user.role">
+      <option *ngFor="let rolse of roles" [value]="role.value"> {{role.display}}
+      </option>
+    </select>
+  </div>
+
+  <!-- select object -->
+  <div>
+    <label>Theme</label>
+    <select name="theme" [(ngModel)]="user.theme">
+      <option *ngFor="let theme of themes" [ngValue]="theme">
+      </option>
+    </select>
+  </div>
+
+  <!-- multiple selects -->
+  <div>
+    <label>Topics</label>
+    <select multiple name="topics" [(ngModel)]="user.topics">
+        <option *ngFor="let topic of topics" [value]="topic.value">
+            {{topic.display}}
+        </option>
+    </select>
+</div>
+
+<!-- checkbox(boolean) -->
+<div>
+    <label>
+        <input type="checkbox" name="isActive" [(ngModel)]="user.isActive">
+        Is Active
+    </label>
+</div>
+
+<!-- checkbox(toggle value) -->
+<div>
+    <input type="hidden" name="toggle" [(ngModel)]="user.toggle">
+    <div>
+        <label>
+            <input type="checkbox" [checked]="user.toggle === toggles[0].value" (change)="$event.target.checked? (user.toggle = toggles[0].value) : (user.toggle = toggles[1].value)">
+            {{ toggles[0].display }}
+        </label>
+    </div>
+</div>
+
+<pre>{{your_form or control_name | json }}</pre>
